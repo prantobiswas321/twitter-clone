@@ -10,7 +10,7 @@ const CreateTweet = () => {
     <div className="create">
       <div className="create__first">
         <div className="create__img">
-          <img src="/images/pronoy.jpg" alt="profile img" />
+          <img src="/images/no-image.png" alt="profile img" />
         </div>
         <div className="create__input">
           <input

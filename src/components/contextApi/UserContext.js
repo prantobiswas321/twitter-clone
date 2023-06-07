@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const UserContext = createContext();
 
@@ -12,6 +13,8 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
 
     // const login = async (username, password) => {
@@ -26,22 +29,28 @@ export const UserProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post('/api/login', {
-                email,
-                password,
+            const response = await axios.post(`http://localhost:8081/login`, {
+                username: email,
+                password: password,
             });
 
             // Assuming the server responds with user information
             const userData = response.data;
-
+            console.log("userdata", userData);
             setUser(userData);
+            setIsLoggedIn(true);
+            localStorage.setItem("token", userData?.id);
+            navigate("/");
         } catch (error) {
             console.error('Login failed', error);
         }
     };
 
     const logout = () => {
+        setIsLoggedIn(false);
         setUser(null);
+        localStorage.removeItem("token");
+        navigate("/login");
     };
 
     // const performLogin = async (username, password) => {
@@ -64,6 +73,7 @@ export const UserProvider = ({ children }) => {
     // };
 
     const userContextValue = {
+        isLoggedIn,
         user,
         login,
         logout,

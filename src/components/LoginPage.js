@@ -17,7 +17,8 @@ const TwitterLoginPage = () => {
         setPassword(event.target.value);
     };
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         login(email, password);
     };
 
@@ -29,7 +30,7 @@ const TwitterLoginPage = () => {
                     <h2 className="twitter-login-title">Log in to Twitter</h2>
                     <form>
                         <div className="twitter-login-input">
-                            <input type="email" value={email} onChange={handleEmailChange} placeholder="email" />
+                            <input type="text" value={email} onChange={handleEmailChange} placeholder="Username or Email" />
                         </div>
                         <div className="twitter-login-input">
                             <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />

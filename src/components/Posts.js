@@ -7,6 +7,7 @@ import {
   FaLeaf,
 } from "react-icons/fa";
 import "./Posts.css";
+import { useUser } from "./contextApi/UserContext";
 
 const Posts = () => {
   const comments = [
@@ -27,11 +28,14 @@ const Posts = () => {
     },
   ];
 
+  const { user } = useUser();
+  console.log(user);
+
   return (
     <div className="postss">
       <div className="postss__first">
         <div className="posts__first__img">
-          <img src="/images/pronoy.jpg" alt="profile img" />
+          <img src="/images/no-image.png" alt="profile img" />
         </div>
         <div className="posts__first__name">
           <strong>Pronoy Sarker</strong>{" "}

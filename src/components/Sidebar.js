@@ -10,7 +10,15 @@ import {
   FaUserAlt,
   FaMehBlank,
 } from "react-icons/fa";
+import { useUser } from "./contextApi/UserContext";
 const Sidebar = () => {
+
+  const { logout } = useUser();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className="sidebar">
       <ul>
@@ -60,8 +68,8 @@ const Sidebar = () => {
             <FaMehBlank className="icons" /> More
           </a>
         </li>
-        <div className="sidebar__Btn">
-          <a href="">Profile</a>
+        <div onClick={handleLogout} className="sidebar__Btn">
+          <a href="">Logout</a>
         </div>
       </ul>
     </div>
